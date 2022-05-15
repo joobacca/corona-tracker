@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from 'react';
 import {
   Button,
   FormControl,
@@ -17,7 +16,6 @@ import useMuiInput from 'src/hooks/useMuiInput';
 
 const DataInput = () => {
   const { addNewEncounter } = useStore();
-  const [encounterDate, setEncounterDate] = useState('');
   const { currentLocation, error, getLocation } = useLocation();
   const { latitude, longitude } = currentLocation;
 
@@ -31,9 +29,15 @@ const DataInput = () => {
     validate: (value: string) => value && value.length > 0,
   });
 
-  const handleNewDate = (event: ChangeEvent<HTMLInputElement>) => {
-    setEncounterDate(event.target.value);
-  };
+  const {
+    value: encounterDate,
+    setValue: setEncounterDate,
+    bind: bindEncounterDate,
+  } = useMuiInput({
+    type: 'datetime-local',
+    initialValue: '',
+    validate: (value: string) => value && value.length > 0,
+  });
 
   const reset = () => {
     setName('');
@@ -60,13 +64,11 @@ const DataInput = () => {
       <Grid item xs={12} md={4}>
         <FormControl sx={{ m: 1 }}>
           <TextField
-            value={encounterDate}
-            onChange={handleNewDate}
             label="Encounter date"
-            type="datetime-local"
             InputLabelProps={{
               shrink: true,
             }}
+            {...bindEncounterDate}
           />
         </FormControl>
       </Grid>
@@ -86,7 +88,11 @@ const DataInput = () => {
             disabled
             endAdornment={
               <InputAdornment position="end">
-                <IconButton sx={{ m: 1, mr: 0 }} onClick={getLocation}>
+                <IconButton
+                  sx={{ m: 1, mr: 0 }}
+                  onClick={getLocation}
+                  aria-label="get-location"
+                >
                   <MyLocationIcon />
                 </IconButton>
               </InputAdornment>

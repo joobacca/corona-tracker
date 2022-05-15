@@ -49,7 +49,7 @@ const DataTable = () => {
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{maxHeight: '40vh'}}>
       <Table sx={{ minWidth: 400 }}>
         <ExtendedTableHead
           order={order}

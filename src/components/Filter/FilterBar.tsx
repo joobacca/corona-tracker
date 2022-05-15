@@ -1,7 +1,7 @@
 import { Box, Button, Menu, MenuItem } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import React, { useState } from 'react';
-import NameFilter from './Filter/NameFilter';
+import NameFilter from './NameFilter';
 
 const FilterBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);

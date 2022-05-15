@@ -5,7 +5,7 @@ const BackgroundImage: React.FunctionComponent = () => {
   return (
     <Box
       position="absolute"
-      height="40%"
+      height="50%"
       width="100%"
       zIndex={0}
       bgcolor="yellow"

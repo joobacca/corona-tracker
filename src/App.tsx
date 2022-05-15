@@ -1,9 +1,9 @@
-import { Box, Container, CssBaseline } from '@mui/material';
+import { Box, Container, CssBaseline, Typography } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import BackgroundImage from './components/BackgroundImage';
 import DataInput from './components/DataInput';
 import DataTable from './components/DataTable';
-import FilterBar from './components/FilterBar';
+import FilterBar from './components/Filter/FilterBar';
 
 const theme = createTheme();
 
@@ -23,7 +23,7 @@ function App() {
           component="main"
           maxWidth="md"
           sx={{
-            paddingTop: 16,
+            paddingTop: 8,
             position: 'relative',
             zIndex: 1,
           }}
@@ -39,6 +39,9 @@ function App() {
               boxShadow: 3,
             }}
           >
+            <Typography component="h1" variant="h5">
+              Corona Tracker
+            </Typography>
             <DataInput />
             <hr style={{ margin: '1rem', width: '100%' }} />
             <FilterBar />

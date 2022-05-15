@@ -1,25 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Container, CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import BackgroundImage from './components/BackgroundImage';
+import DataInput from './components/DataInput';
+import DataTable from './components/DataTable';
+import FilterBar from './components/FilterBar';
+
+const theme = createTheme();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box
+        sx={{
+          height: '100vh',
+          backgroundColor: 'grey',
+          position: 'relative',
+        }}
+      >
+        <BackgroundImage />
+        <Container
+          component="main"
+          maxWidth="md"
+          sx={{
+            paddingTop: 8,
+            position: 'relative',
+            zIndex: 1,
+          }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Box
+            sx={{
+              p: 2,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              backgroundColor: 'white',
+              borderRadius: 2,
+              boxShadow: 3,
+            }}
+          >
+            <DataInput />
+            <hr style={{ margin: '1rem', width: '100%' }} />
+            <FilterBar />
+            <DataTable />
+          </Box>
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 }
 

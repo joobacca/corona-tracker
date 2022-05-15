@@ -10,7 +10,7 @@ const BackgroundImage: React.FunctionComponent = () => {
       zIndex={0}
       bgcolor="yellow"
       sx={{
-        // Hope you don't load this from a nested path...
+        // Hope you don't load this app from a sub folder...
         backgroundImage: `url(/corona.jpg)`,
         backgroundSize: 'cover',
       }}

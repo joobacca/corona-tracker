@@ -5,3 +5,8 @@ export const getLocalDateTime = (dateString: string) => {
 
   return `${date.toLocaleDateString('de-DE')} ${date.toLocaleTimeString('de-DE')}`;
 }
+
+export const formatLatLong = (latitude: number, longitude: number) => {
+  if (latitude === -1 || longitude === -1) return '';
+  return `${latitude}, ${longitude}`
+}

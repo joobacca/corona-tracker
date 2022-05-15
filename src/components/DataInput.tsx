@@ -13,6 +13,8 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 import useStore from 'src/hooks/useStore';
 import useLocation from 'src/hooks/useLocation';
 import useMuiInput from 'src/hooks/useMuiInput';
+import { flushSync } from 'react-dom';
+import { formatLatLong } from 'src/utils/format';
 
 const DataInput = () => {
   const { addNewEncounter } = useStore();
@@ -21,31 +23,40 @@ const DataInput = () => {
 
   const {
     value: name,
-    setValue: setName,
+    reset: resetName,
+    error: nameError,
     bind: bindName,
+    setAllowValidation: validateName,
   } = useMuiInput({
-    helperText: "Name can't be empty",
+    helperText: 'Please enter a valid name',
     initialValue: '',
-    validate: (value: string) => value && value.length > 0,
+    validate: (value: string) => !!value && /[a-zA-Z ]{2,99}/.test(value),
   });
 
   const {
     value: encounterDate,
-    setValue: setEncounterDate,
+    reset: resetDate,
+    error: encounterDateError,
     bind: bindEncounterDate,
+    setAllowValidation: validateDate,
   } = useMuiInput({
     type: 'datetime-local',
+    helperText: 'Please enter a valid date',
     initialValue: '',
-    validate: (value: string) => value && value.length > 0,
+    validate: (value: string) => !!value && value.length > 0,
   });
 
   const reset = () => {
-    setName('');
-    setEncounterDate('');
+    resetName();
+    resetDate();
   };
 
   const handleAddButtonClick = () => {
-    if (name === '' || encounterDate === '') return;
+    flushSync(() => {
+      validateName(true);
+      validateDate(true);
+    });
+    if (nameError || encounterDateError) return;
     addNewEncounter({
       name,
       encounterDate,
@@ -79,11 +90,7 @@ const DataInput = () => {
             id="location"
             type="text"
             label="Location"
-            value={
-              latitude !== -1 && longitude !== -1
-                ? `${latitude}, ${longitude}`
-                : ''
-            }
+            value={formatLatLong(latitude, longitude)}
             error={!!error}
             disabled
             endAdornment={

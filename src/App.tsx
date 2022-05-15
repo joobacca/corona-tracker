@@ -23,7 +23,7 @@ function App() {
           component="main"
           maxWidth="md"
           sx={{
-            paddingTop: 8,
+            paddingTop: 16,
             position: 'relative',
             zIndex: 1,
           }}

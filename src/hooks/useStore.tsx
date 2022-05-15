@@ -14,10 +14,10 @@ const defaultList: Encounter[] = getLS();
 
 const useStore = create<EncounterState>((set, get) => ({
   encounters: defaultList,
-  filteredEncounters: [],
+  filteredEncounters: null,
   setFilteredEncounters: (newEncounters: Encounter[]) =>
     set({ filteredEncounters: newEncounters }),
-  clearFilteredEncounters: () => set({ filteredEncounters: [] }),
+  clearFilteredEncounters: () => set({ filteredEncounters: null }),
   addNewEncounter: (encounter: Encounter) => {
     const newEncounters = [...get().encounters, encounter];
     setLS(newEncounters);

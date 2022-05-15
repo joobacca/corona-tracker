@@ -2,18 +2,24 @@ import { Dispatch, SetStateAction, useEffect } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton, TextField } from '@mui/material';
 import { Box } from '@mui/system';
+import shallow from 'zustand/shallow';
 import useMuiInput from 'src/hooks/useMuiInput';
 import useStore from 'src/hooks/useStore';
 
 const NameFilter = ({
-  onClose,
+  setNameFilter,
 }: {
-  onClose: Dispatch<SetStateAction<boolean>>;
+  setNameFilter: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const setFilteredEncounters = useStore(
-    (state) => state.setFilteredEncounters,
+  const [encounters, setFilteredEncounters, clearFilteredEncounters] = useStore(
+    (state) => [
+      state.encounters,
+      state.setFilteredEncounters,
+      state.clearFilteredEncounters,
+    ],
+    shallow,
   );
-  const encounters = useStore((state) => state.encounters);
+
   const { value: nameValue, bind: bindName } = useMuiInput({
     initialValue: '',
     validate: () => true,
@@ -34,7 +40,13 @@ const NameFilter = ({
         {...bindName}
         InputLabelProps={{ shrink: true }}
       />
-      <IconButton onClick={() => onClose(false)} sx={{ ml: 1 }}>
+      <IconButton
+        onClick={() => {
+          clearFilteredEncounters();
+          setNameFilter(false);
+        }}
+        sx={{ ml: 1 }}
+      >
         <CloseIcon />
       </IconButton>
     </Box>

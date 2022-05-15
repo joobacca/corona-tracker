@@ -12,6 +12,7 @@ const BackgroundImage: React.FunctionComponent = () => {
       sx={{
         // Hope you don't load this from a nested path...
         backgroundImage: `url(/corona.jpg)`,
+        backgroundSize: 'cover',
       }}
     />
   );

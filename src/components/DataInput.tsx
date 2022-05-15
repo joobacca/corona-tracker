@@ -52,12 +52,12 @@ const DataInput = () => {
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={3}>
+      <Grid item xs={12} md={3}>
         <FormControl sx={{ m: 1 }}>
           <TextField name="Name" label="Name" {...bindName} />
         </FormControl>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item xs={12} md={4}>
         <FormControl sx={{ m: 1 }}>
           <TextField
             value={encounterDate}
@@ -70,7 +70,7 @@ const DataInput = () => {
           />
         </FormControl>
       </Grid>
-      <Grid item xs={3}>
+      <Grid item xs={6} md={3}>
         <FormControl sx={{ m: 1 }}>
           <InputLabel htmlFor="location">Location</InputLabel>
           <OutlinedInput
@@ -95,7 +95,7 @@ const DataInput = () => {
           <FormHelperText error>{error}</FormHelperText>
         </FormControl>
       </Grid>
-      <Grid item xs={1}>
+      <Grid item xs={6} md={1}>
         <FormControl sx={{ m: 1 }}>
           <Button
             onClick={handleAddButtonClick}

@@ -42,7 +42,7 @@ const DataTable = () => {
   const displayingEncounters: Encounter[] =
     (filteredEncounters ?? encounters) || [];
 
-  const handleRequestSort = (event: FormEvent, property: string) => {
+  const handleRequestSort = (_event: FormEvent, property: string) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
